@@ -303,7 +303,7 @@ class Db {
         if(is_string($value)) {
             $value =  '\''.$this->escapeString($value).'\'';
         }elseif(isset($value[0]) && is_string($value[0]) && strtolower($value[0]) == 'exp'){
-            $value =  $this->escapeString($value[1]);
+            $value =  $value[1];
         }elseif(is_array($value)) {
             $value =  array_map(array($this, 'parseValue'),$value);
         }elseif(is_bool($value)){
