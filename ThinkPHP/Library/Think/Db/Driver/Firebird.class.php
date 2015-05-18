@@ -148,4 +148,21 @@ class Firebird extends Driver{
         }
         return $limitStr;
     }
+    
+     /**
+     * 启动事务
+     * @access public
+     * @return void
+     */
+    public function startTrans() {
+        $this->initConnect(true);
+        if ( !$this->_linkID ) return false;
+        //数据rollback 支持
+        if ($this->transTimes == 0) {
+			$this->_linkID->commit();
+            $this->_linkID->beginTransaction();
+        }
+        $this->transTimes++;
+        return ;
+    }
 }
